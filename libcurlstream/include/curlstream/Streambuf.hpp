@@ -120,6 +120,10 @@ class Streambuf : public std::basic_streambuf<char>, private curlstream::Timer {
 
     setp(wbuf_.data(), wbuf_.data() + wbuf_.size());
 
+    if (!traits_type::eq_int_type(ch, traits_type::eof())) {
+      sputc(traits_type::to_char_type(ch));
+    }
+
     return traits_type::not_eof(ch);
   }
 
